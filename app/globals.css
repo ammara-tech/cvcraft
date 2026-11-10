@@ -1,0 +1,131 @@
+@import "tailwindcss";
+
+/*
+  CVcraft's look: a tidy desk with paper on it. Warm grey around, white paper for the CV,
+  and one navy accent for buttons and links. Green, amber and red only for "looking good",
+  tips and things to fix, always with a word too, so colour is never the only clue.
+*/
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+@theme {
+  --color-page: #eeece7;
+  --color-card: #ffffff;
+  --color-ink: #1b1b1f;
+  --color-ink-soft: #55555e; /* passes AA on page and card */
+  --color-line: #dedcd6;
+  --color-accent: #1f4e79; /* buttons and links */
+  --color-on-accent: #ffffff;
+  --color-accent-soft: #e2ebf4;
+  --color-pass: #17603f;
+  --color-pass-soft: #e1f0e6;
+  --color-warn: #8a5300;
+  --color-warn-soft: #fbefd6;
+  --color-fail: #b42318;
+  --color-fail-soft: #fde8e6;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+:root[data-theme="dark"] {
+  --color-page: #121216;
+  --color-card: #1c1c22;
+  --color-ink: #ececf1;
+  --color-ink-soft: #aaaab6;
+  --color-line: #30303a;
+  --color-accent: #9cc3ea;
+  --color-on-accent: #121216;
+  --color-accent-soft: #1b2d42;
+  --color-pass: #7fd3a6;
+  --color-pass-soft: #1c3a2a;
+  --color-warn: #f2c46b;
+  --color-warn-soft: #3a2c12;
+  --color-fail: #ff9b8f;
+  --color-fail-soft: #3d1c1c;
+  color-scheme: dark;
+}
+
+html {
+  color-scheme: light;
+}
+
+body {
+  background: var(--color-page);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-tap-highlight-color: transparent;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+@layer components {
+  .tool {
+    display: inline-flex;
+    height: 2.5rem;
+    min-width: 2.5rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    color: var(--color-ink-soft);
+  }
+  .tool:hover {
+    background: var(--color-accent-soft);
+    color: var(--color-accent);
+  }
+  .field {
+    width: 100%;
+    border-radius: 0.75rem;
+    border: 1px solid var(--color-line);
+    background: var(--color-card);
+    color: var(--color-ink);
+    padding: 0.7rem 0.9rem;
+    font-size: 16px; /* 16px stops phones zooming in when you tap a box */
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 0.75rem;
+    padding: 0.7rem 1.1rem;
+    font-weight: 700;
+    background: var(--color-accent);
+    color: var(--color-on-accent);
+  }
+  .btn:hover {
+    filter: brightness(1.08);
+  }
+  .btn-quiet {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 0.75rem;
+    padding: 0.6rem 1rem;
+    font-weight: 600;
+    border: 1px solid var(--color-line);
+    background: var(--color-card);
+    color: var(--color-ink);
+  }
+  .btn-quiet:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+  }
+  /* The CV preview is always white paper with dark ink, like the PDF, in both themes */
+  .paper {
+    background: #ffffff;
+    color: #1a1a1f;
+    box-shadow: 0 1px 3px rgb(0 0 0 / 0.12), 0 12px 32px rgb(0 0 0 / 0.12);
+  }
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}
